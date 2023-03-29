@@ -9,6 +9,8 @@ from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from .models import Course, Lesson
 from profiles.views import LessonProgress,Profile
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @method_decorator(login_required, name='dispatch')
@@ -82,3 +84,13 @@ class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
+    def post(self, request):
+        users = User.objects.all()
+        for user in users:
+            try:
+                profile = Profile.objects.get(user=user)
+            except ObjectDoesNotExist:
+                # If a profile doesn't exist, create a new one with courses=None
+                profile = Profile.objects.create(user=user)
+                profile.courses.set([])
+        return redirect('login')

@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-0^w^g$ps0i6p@=n)_pq@tj76bem$3(nsooj+mpo0k9@$f+4ru7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -95,13 +95,12 @@ WSGI_APPLICATION = "course_tracker.wsgi.application"
 #     }
 # }
 
-print(os.environ.get('DATABASE_URL'))
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
 }
-print(os.environ.get('DATABASE_URL'))
-#username:admin100
-#password:test@123
+
+# username:admin100
+# password:test@123
 
 
 # Password validation
