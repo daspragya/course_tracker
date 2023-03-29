@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<h1>My Courses</h1>
+<ul>
+  {% for user_course in user_courses_completed%}
+  <!--For every course show if it is completed or under process-->
+  <li>
+    <a href="{% url 'courses:course_detail' user_course.pk %}">
+      {{ user_course }} </a
+    >-[Completed]
+  </li>
+  {% endfor %} {% for user_course in user_courses_progress%}
+  <!--For every course show if it is completed or under process-->
+  <li>
+    <a href="{% url 'courses:course_detail' user_course.pk %}">
+      {{ user_course }} </a
+    >-[In Progress]
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
